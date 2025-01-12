@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_REGISTRY = 'http://0.0.0.0:5000'  // Replace with your private registry URL
-        DOCKER_IMAGE = 'my-test-image'                  // Your image name
-        REGISTRY_CREDENTIALS = 'docker_registry_creds'  // Jenkins credentials ID for your registry
+        DOCKER_REGISTRY = '0.0.0.0:5000'
+        DOCKER_IMAGE = 'my-test-image'                // Image name
+        REGISTRY_CREDENTIALS = 'docker_registry_creds' // Jenkins credentials ID
     }
 
     stages {
@@ -30,7 +30,7 @@ pipeline {
         stage('Push to Private Registry') {
             steps {
                 script {
-                    docker.withRegistry("${DOCKER_REGISTRY}", "${REGISTRY_CREDENTIALS}") {
+                    docker.withRegistry("http://${DOCKER_REGISTRY}", "${REGISTRY_CREDENTIALS}") {
                         def app = docker.image("${DOCKER_REGISTRY}/${DOCKER_IMAGE}:${env.BUILD_NUMBER}")
                         app.push("${env.BUILD_NUMBER}")
                         app.push("latest")
