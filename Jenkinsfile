@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_REGISTRY = '0.0.0.0:5000'
         DOCKER_IMAGE = 'my-test-image'                // Image name
-        REGISTRY_CREDENTIALS = 'docker_registry_creds' // Jenkins credentials ID
+        REGISTRY_CREDENTIALS = 'docker_hub_creds_id' // Jenkins credentials ID
     }
 
     stages {
